@@ -202,6 +202,10 @@ header {
     display: flex;
     justify-content: space-between;
 }
+.filter-b {
+    display: flex;
+    align-items: center;
+}
 .filter-btn {
     border: 0.0625rem solid #cdd5de;
     background-color: #fff;
@@ -218,6 +222,19 @@ header {
 .filter-btn .filter-btn-text {
     margin-right: 5px;
 }
+.clear-all {
+    border: 0;
+    background-color: transparent;
+    text-decoration: underline;
+    color: #567390;
+    box-shadow: none;
+    padding: 0.125rem 0.25rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-style: normal;
+    font-size: .875rem;
+    cursor: pointer;
+}
 .fa-w-14 {
     width: 0.875rem;
     height: 0.8rem;
@@ -225,8 +242,12 @@ header {
 .filter-btn:hover {
     background-color: #f2f5f7;
 }
+.active-btn {
+    background-color: #f2f5f7;
+}
 .class-one {
     display: flex;
+    align-items: start;
 }
 .classes {
     display: none;
@@ -238,7 +259,7 @@ header {
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.drivable-part, .towable-part {
+.drivable-part, .towable-part, .more-filters-part, .price-part {
     max-width: 40rem;
     width: 50vw;
     box-shadow: 0 0.1875rem 1.25rem rgba(0,0,0,.22);
@@ -247,12 +268,43 @@ header {
     border-radius: 0.5rem;
     z-index: 5;
     position: absolute;
-    top: 25%;
+    top: 15%;
     background: white;
     padding: 1.5rem !important;
     display: none;
     margin-left: .8rem;
 }
+.price-part {
+    max-width: 30rem;
+}
+.more-filters-part {
+    right: 0;
+}
+.more-filters-part .more-filters-one, .more-filters-part .more-filters-two {
+    display: flex;
+    justify-content: space-between;
+}
+.more-filters-part .more-filters-one h2, .more-filters-part .more-filters-two h2 {
+    font-weight: 400;
+    font-style: normal;
+    font-size: .875rem;
+    color: #032e5a;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+.more-filters-part .more-filters-one div label, .more-filters-part .more-filters-two div label {
+    font-weight: 400;
+    font-style: normal;
+    font-size: .875rem;
+    color: #032e5a;
+}
+.more-filters-part .more-filters-one, .more-filters-part .more-filters-two {
+    width: 60%;
+}
+.more-filters-part .more-filters-one div, .more-filters-part .more-filters-two div {
+    margin-bottom: 10px;
+}
+
 .filter-btn .up {
     display: none;
 }
@@ -266,7 +318,7 @@ header {
 .towable-part {
     margin-left: 8.3rem;
 }
-.drivable-part.active, .towable-part.active {
+.drivable-part.active, .towable-part.active , .more-filters-part.active,  .price-part.active {
     display: block;
     position: fixed;
 }

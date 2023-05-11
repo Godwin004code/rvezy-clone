@@ -22,7 +22,7 @@
         </div>
     </header>
     <div class="guests" ref="guests">
-        <div class="ad">
+        <div class="ad ex">
             <h2>Adults</h2>
             <div class="option">
                 <div>-</div>
@@ -30,7 +30,7 @@
                 <div>+</div>
             </div>
         </div>
-        <div class="ad">
+        <div class="ad ex">
             <h2>Children</h2>
             <div class="option">
                 <div>-</div>
@@ -38,7 +38,7 @@
                 <div>+</div>
             </div>
         </div>
-        <div class="ad">
+        <div class="ad ex">
             <h2>Pets</h2>
             <input type="radio">
         </div>
@@ -70,32 +70,54 @@
         <button class="filter-btn drivable">
             <span class="filter-btn-text">Pet friendly</span>
         </button>
-        <button class="filter-btn drivable">
+        <button class="filter-btn drivable"  @click="InstabookAvailablefilter" ref="instant_book">
             <div class="filter-btn-text">Instant Book</div>
             <svg  data-v-df980350="" data-v-a6b063a6="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bolt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="ml-1 svg-inline--fa fa-bolt fa-w-14"><path data-v-df980350="" data-v-a6b063a6="" fill="currentColor" d="M317.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224C.9 240.7-2.6 254.8 2 267.3S18.7 288 32 288H143.5L66.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H240.5L317.4 44.6z" class=""></path></svg>
         </button>
-        <button class="filter-btn drivable">
+        <button class="filter-btn drivable" @click="handleClassChangeMoreFilters" ref="more_filter">
             <span class="filter-btn-text">More filters</span>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-chevron-up fa-w-14 up"><path fill="currentColor" d="M201.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 173.3 54.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" class=""></path></svg>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-chevron-down fa-w-14 down"><path fill="currentColor" d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" class=""></path></svg>
         </button>
+        <button class="clear-all" @click="ClearAllFilters">clear all</button>
         </div>
-        <div class="filter-b"></div>
+        <div class="filter-b">
+            <div>{{ mapText }}</div>
+            <div class="panel-body">  
+      <!--Only code you need is this label-->
+      <label class="switch">
+        <input type="checkbox" @click="toggleCheckbox">
+        <div class="slider round"></div>
+      </label>
+     
+    </div>
+        </div>
     </section>
 </section>
     <section class="drivable-part" ref="drivable_part">
         <div class="select">
-            <input type="checkbox" id="select">
+            <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
            <span class="select-all"> Select all drivables</span>
         </div>
         <section class="drive-box">
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="ClassA" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div class="class-one-part">
                     <h2>Class A</h2>
                     <p>Looks and drives like a bus and is ideal for 4-8 people.</p>
                 </div>
             </div>
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="ClassB" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div class="class-one-part">
                     <h2>Class B</h2>
                     <p>Looks and drives like a bus and is ideal for 4-8 people.</p>
@@ -104,29 +126,43 @@
         </section>
         <section class="drive-box">
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox"  value="ClassC" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div class="class-one-part">
                     <h2>Class C</h2>
                     <p>Looks and drives like a bus and is ideal for 4-8 people.</p>
                 </div>
             </div>
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="ClassD" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div class="class-one-part">
                     <h2>Class D</h2>
                     <p>Looks and drives like a bus and is ideal for 4-8 people.</p>
                 </div>
             </div>
         </section>
+
         <section class="drive-box">
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="ClassE" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div class="class-one-part">
                     <h2>Class E</h2>
                     <p>Looks and drives like a bus and is ideal for 4-8 people.</p>
                 </div>
             </div>
         </section>
+        <div class="ad">
+            <h3>Clear all</h3>
+            <button class="zbtn">Apply</button>
+        </div>
     </section>
     <section class="towable-part" ref="towable_part">
         <div>
@@ -135,14 +171,20 @@
         </div>
         <section class="tow-box">
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="FifthWheel" v-model="selectedRVTypes">
+        <span class="checkmark" ></span>
+    </label>
                 <div>
                     <h2>Fifth Wheel</h2>
                     <p>The largest towable. Mounts to a hitch inside a truck bed. Ideal for 4-8 people.</p>
                 </div>
             </div>
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="TravelTrailer" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div>
                     <h2>Travel Trailer</h2>
                     <p>A midsize living space pulled behind a suitable tow vehicle. Ideal for 4-8 people.</p>
@@ -151,14 +193,20 @@
         </section>
         <section class="tow-box">
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="TentTrailer" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div>
                     <h2>Tent Trailer</h2>
                     <p>Collapsible top that folds down for towing. Ideal for 2-8 people.</p>
                 </div>
             </div>
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="Hybrid" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div>
                     <h2>Hybrid</h2>
                     <p>Trailer with foldable components. Easy to tow. Ideal for 2-8 people.</p>
@@ -167,23 +215,220 @@
         </section>
         <section class="tow-box">
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="ToyHauler" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div>
                     <h2>Toy Hauler</h2>
                     <p>Looks and drives like a bus and is ideal for 4-8 people.</p>
                 </div>
             </div>
             <div class="class-one">
-                <input type="checkbox">
+                <label class="checkbox-container">
+        <input type="checkbox" value="MicroTrailer" v-model="selectedRVTypes">
+        <span class="checkmark"></span>
+    </label>
                 <div>
                     <h2>Micro Trailer</h2>
                     <p>A tiny bed on wheels. Some include a kitchen and/or wet bath. 1-2 people.</p>
                 </div>
             </div>
+           
         </section>
+        <div class="ad">
+            <h3>Clear all</h3>
+            <button class="zbtn">Apply</button>
+        </div>
+    </section>
+    <section class="price-part" ref="price_part">
+        <h2>Price range / night</h2>
+        <section class="price-flex">
+            <div>
+                <h2>Min Price</h2>
+                <input data-v-df980350="" id="min-price" type="text" class="price-input form-control" data-testid="min-price" :value="num">
+            </div>
+            <div>
+                <h2>Max Price</h2>
+                <input data-v-df980350="" id="min-price" type="text" class="price-input form-control" data-testid="min-price" :value="options.max">
+            </div>
+        </section>
+        <div class="price-part-slider">
+            <vue-slider  ref="slider"
+    v-model="num"
+    v-bind="options">
+        </vue-slider>
+        </div>
+        <div class="ad">
+            <h3>Clear all</h3>
+            <button class="zbtn">Apply</button>
+        </div>
+    </section>
+    <section class="more-filters-part" ref="more_filters_part">
+        <div class="more-filters-one">
+            <section class="temperature">
+                <h2>temperature</h2>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="ac">Air Conditioner</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="heater">Heater</label>
+            </div>
+        </section>
+        <section class="kitchen">
+            <h2>kitchen</h2>
+            <div class="ref">
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="ref">Refrigerator</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="mic">Microwave</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="din">Dining table</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="stove">stove Range</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="kit">Kitchen Sink</label>
+            </div>
+        </section>
+        </div>
+        <div class="more-filters-two">
+            <section class="bathroom">
+                <h2>bathroom</h2>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="ins">Inside Shower</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="ous">Outside Shower</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="toilet">Toilet</label>
+            </div>
+        </section>
+        <section class="kitchen">
+            <h2>other</h2>
+            <div class="ref">
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="ref">Family Friendly</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="mic">Airport pickup</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="din">include RV cottage</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="stove">stove Range</label>
+            </div>
+            <div>
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="kit">Kitchen Sink</label>
+            </div>
+        </section>
+        </div>
+        <div class="more-filters-three">
+            <div class="weight">
+                <label for="weight">Weight</label>
+                <vue-slider  ref="slider"
+    v-model="weightNum"
+    v-bind="weightOptions">
+        </vue-slider>
+            </div>
+            <div class="length">
+                <label for="length">Length</label>
+                <vue-slider  ref="slider"
+    v-model="lengthNum"
+    v-bind="lengthOptions">
+        </vue-slider>
+            </div>
+        </div>
+        <div class="more-filters-four">
+            <div class="festival">
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="kit">Festival and events friendly</label> 
+            </div>
+            <div class="experience">
+                <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+                <label for="kit">Experience not required</label>
+            </div>
+        </div>
+        <div class="ad">
+            <h3>Clear all</h3>
+            <button class="zbtn">Apply</button>
+        </div>
     </section>
     <section class="title">
         <h2>RV Rentals</h2>
+        <!-- <vue-slider  ref="slider"
+    v-model="value"
+    v-bind="options">
+        </vue-slider> -->
         <div>
             <select name="sort" id="sort">
                 <option value="Recommended">Recommended</option>
@@ -193,11 +438,13 @@
             </select>
         </div>
     </section>
-    <section class="preloader-container" v-if="isLoading == true">
+    <section class="main">
+        <section :class="checkbox === true ? 'main-content-area' : 'main-content-area f-w'">
+            <section class="preloader-container" v-if="isLoading == true">
         <component v-for="(pre,index) in preloader" :key="index" :is="pre" />
     </section>
     <section class="rv-container" v-else>
-    <section class="skeleton" v-for="rv,index in data" :key="index">
+    <section class="skeleton" v-for="rv,index in filteredRVListings" :key="index">
     <section class="card-img">
         <img class="imgs" :src="changeToWebp(rv.Photos[0].Path)" />
     </section>
@@ -205,10 +452,22 @@
         <div class="truncate-text">{{ rv.RVName }}</div>
         <div class="sleep">Sleep {{ rv.Guests }} . {{ rv.RVType }}</div>
         <div class="sleep city">{{ rv.City }}, {{ rv.Country }}</div>
-        <div class="rate"><span class="price">${{ rv.AveragePrice }} USD</span>/night</div>
+        <div class="rate"><span class="price">${{ rv.AveragePrice }} USD</span>/night
+
+            
+        <span v-if="rv.InstabookAvailable === true">
+            <svg  data-v-df980350="" data-v-a6b063a6="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bolt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="ml-1 svg-inline--fa fa-bolt fa-w-14"><path data-v-df980350="" data-v-a6b063a6="" fill="currentColor" d="M317.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224C.9 240.7-2.6 254.8 2 267.3S18.7 288 32 288H143.5L66.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H240.5L317.4 44.6z" class=""></path></svg>
+        </span>
+        </div>
     </section>
     </section>    
     </section>
+        </section>
+        <section class="main-content-map" v-if="checkbox === true">
+            map will be here
+        </section>
+   
+</section>
 </template>
 
 
@@ -217,12 +476,14 @@
 
 <script>
 import SkeletonCard from "./SkeletonCard.vue"
-import VueImageSlider from 'vue-image-slider'
+import vueSlider from "vue-slider-component"
+//import VueImageSlider from 'vue-image-slider'
 export default {
     name: 'App',
+   
     components: {
         SkeletonCard,
-        VueImageSlider
+        vueSlider
     },
     data() {
         return {
@@ -235,26 +496,168 @@ export default {
     'https://cdn.pixabay.com/photo/2016/02/17/23/03/usa-1206240_1280.jpg',
     'https://cdn.pixabay.com/photo/2015/05/15/14/27/eiffel-tower-768501_1280.jpg',
     'https://cdn.pixabay.com/photo/2016/12/04/19/30/berlin-cathedral-1882397_1280.jpg'
-   ]
+   ],
+   checkbox: false,
+   map_text: "Show map",
+   num: 0,
+   weightNum: 0,
+   lengthNum: 0,
+   options: {
+
+    dotSize: 14,
+    width: '100%',
+    height: 4,
+    contained: false,
+    direction: 'ltr',
+    data: null,
+    dataLabel: 'label',
+    dataValue: 'value',
+    min: 0,
+    max: 500,
+    interval: 1,
+    disabled: false,
+    clickable: true,
+    duration: 0.5,
+    adsorb: false,
+    lazy: false,
+    tooltip: 'active',
+    tooltipPlacement: 'top',
+    tooltipFormatter: void 0,
+    useKeyboard: false,
+    keydownHook: null,
+    dragOnClick: false,
+    enableCross: true,
+    fixed: false,
+    minRange: void 0,
+    maxRange: void 0,
+    order: true,
+    marks: false,
+    dotOptions: void 0,
+    dotAttrs: void 0,
+    process: true,
+    dotStyle: void 0,
+    railStyle: void 0,
+    processStyle: void 0,
+    tooltipStyle: void 0,
+    stepStyle: void 0,
+    stepActiveStyle: void 0,
+    labelStyle: void 0,
+    labelActiveStyle: void 0,
+   },
+   lengthOptions: {
+
+dotSize: 14,
+width: '100%',
+height: 4,
+contained: false,
+direction: 'ltr',
+data: null,
+dataLabel: 'label',
+dataValue: 'value',
+min: 0,
+max: 500,
+interval: 1,
+disabled: false,
+clickable: true,
+duration: 0.5,
+adsorb: false,
+lazy: false,
+tooltip: 'active',
+tooltipPlacement: 'top',
+tooltipFormatter: void 0,
+useKeyboard: false,
+keydownHook: null,
+dragOnClick: false,
+enableCross: true,
+fixed: false,
+minRange: void 0,
+maxRange: void 0,
+order: true,
+marks: false,
+dotOptions: void 0,
+dotAttrs: void 0,
+process: true,
+dotStyle: void 0,
+railStyle: void 0,
+processStyle: void 0,
+tooltipStyle: void 0,
+stepStyle: void 0,
+stepActiveStyle: void 0,
+labelStyle: void 0,
+labelActiveStyle: void 0,
+},
+weightOptions: {
+
+dotSize: 14,
+width: '100%',
+height: 4,
+contained: false,
+direction: 'ltr',
+data: null,
+dataLabel: 'label',
+dataValue: 'value',
+min: 0,
+max: 500,
+interval: 1,
+disabled: false,
+clickable: true,
+duration: 0.5,
+adsorb: false,
+lazy: false,
+tooltip: 'active',
+tooltipPlacement: 'top',
+tooltipFormatter: void 0,
+useKeyboard: false,
+keydownHook: null,
+dragOnClick: false,
+enableCross: true,
+fixed: false,
+minRange: void 0,
+maxRange: void 0,
+order: true,
+marks: false,
+dotOptions: void 0,
+dotAttrs: void 0,
+process: true,
+dotStyle: void 0,
+railStyle: void 0,
+processStyle: void 0,
+tooltipStyle: void 0,
+stepStyle: void 0,
+stepActiveStyle: void 0,
+labelStyle: void 0,
+labelActiveStyle: void 0,
+},
+selectedRVTypes: [],
         }
+        
     },
     
     methods: {
         getDatas() {
             this.isLoading = true
-            console.log(this.isLoading)
+           // console.log(this.isLoading)
             fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=45.548191514007186&neLng=-75.21003668945312&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured")
             .then((response) => response.json())
             .then((data) => {
                 
-                this.data = data.PopularRVs.ListRVs
+                
             
                 this.isLoading = false
                 //console.log(this.isLoading)
+                const featured = data.FeaturedRVs.ListRVs
+                const popular = data.PopularRVs.ListRVs
+                const newData = featured.concat(popular)
+                this.data = newData
                 console.log(this.data)
+                
                
             } )
         },
+        toggleCheckbox() {
+      this.checkbox = !this.checkbox
+      this.$emit('setCheckboxVal', this.checkbox)
+    },
         changeToWebp(url){
             const path = `${this.baseURL}${url}`
             return path.replace(".jpg", ".webp")
@@ -264,35 +667,101 @@ export default {
             this.$refs.drivable_part.classList.toggle('active')
             this.$refs.drivable.classList.toggle('active')
             this.$refs.towable_part.classList.remove('active')
+            this.$refs.price_part.classList.remove('active')
+            this.$refs.more_filters_part.classList.remove("active")
         },
         handleClassChangeT() {
            
            this.$refs.towable_part.classList.toggle('active')
            this.$refs.towable.classList.toggle('active')
            this.$refs.drivable_part.classList.remove('active')
+           this.$refs.price_part.classList.remove('active')
+           this.$refs.more_filters_part.classList.remove("active")
        },
        handleClassChangePrice() {
            
-         //  this.$refs.price_part.classList.toggle('active')
+            this.$refs.price_part.classList.toggle('active')
            this.$refs.price.classList.toggle('active')
            this.$refs.drivable_part.classList.remove('active')
-           this.$refs.drivable_part.classList.remove('active')
+           
            this.$refs.towable_part.classList.remove('active')
+           this.$refs.more_filters_part.classList.remove("active")
+       },
+       handleClassChangeMoreFilters() {
+        this.$refs.more_filters_part.classList.toggle("active")
+        this.$refs.price_part.classList.remove('active')
+        this.$refs.towable_part.classList.remove('active')
+        this.$refs.more_filter.classList.toggle("active")
+        this.$refs.drivable_part.classList.remove('active')
        },
        handleGuestClick() {
         console.log('clicked')
         this.$refs.guests.classList.toggle('active')
+        this.$refs.towable_part.classList.remove('active')
+        this.$refs.drivable_part.classList.remove('active')
        },
        removeAllActive() {
         this.$refs.drivable_part.classList.remove('active')
            this.$refs.towable_part.classList.remove('active')
            this.$refs.guests.classList.remove('active')
-       }
+       },
+  
+       InstabookAvailablefilter() {
+        console.log("clicked")
+        this.$refs.instant_book.classList.add("active-btn")
+        const instaData = this.data.filter(res => res.InstabookAvailable === true)
+        this.data = instaData
+        
+       },
+       ClearAllFilters() {
+        fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=45.548191514007186&neLng=-75.21003668945312&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured")
+            .then((response) => response.json())
+            .then((data) => {
+                
+                
+            
+                this.isLoading = false
+                this.$refs.instant_book.classList.remove("active-btn")
+                //console.log(this.isLoading)
+                const featured = data.FeaturedRVs.ListRVs
+                const popular = data.PopularRVs.ListRVs
+                const newData = featured.concat(popular)
+                this.data = newData
+                
+               
+            } )
+       },
+    
+       
     },
     created() {
         this.getDatas()
        
+    },
+    computed: {
+    backgroundStyles() {
+      return {
+        'gold-mid': this.value,
+        'gray-lighter': !this.value
+      };
+    },
+    indicatorStyles() {
+      return { transform: this.value ? 'translateX(14px)' : 'translateX(0)' };
+    },
+    mapText() {
+        return this.checkbox === true ? "Hide map" : "Show map"
+    },
+    filteredRVListings() {
+    if (this.selectedRVTypes.length === 0) {
+      return this.data;
+    } else {
+      return this.data.filter(listing => {
+        return this.selectedRVTypes.includes(listing.RVType);
+      });
     }
+  }
+  }
+
    
 }
 </script>

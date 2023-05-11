@@ -12,8 +12,8 @@
     "vue": "^3.2.13",
     "vue-easy-slider": "^5.3.4",
     "vue-image-slider": "^1.0.2",
-    "vue-loading-skeleton": "^1.1.9",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue-slider-component": "^4.1.0-beta.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

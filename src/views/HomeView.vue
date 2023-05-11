@@ -71,7 +71,14 @@ export default {
   justify-content: space-between;
   margin-bottom: 30px;
 }
-
+.ad {
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.ad.ex {
+  border-top: 0;
+}
 .ad h2 {
   font-size: 1.2rem;
     font-weight: 400;
@@ -91,6 +98,7 @@ export default {
   align-items: center;
 }
 .zbtn {
+  border: 0;
   padding: 0.5rem 1rem;
     border-radius: 1.5rem;
     font-weight: 600;
@@ -103,7 +111,7 @@ export default {
   justify-content: space-between;
 }
 .class-one {
-  padding: 0.25rem!important;
+  padding: 0.45rem !important;
   display: flex!important;
   border: 0.0625rem solid #cdd5de;
     border-radius: 0.25rem;
@@ -122,6 +130,9 @@ export default {
     font-size: .875rem;
     margin-top: 8px;
 }
+.class-one h2 {
+  margin-top: 0;
+}
 .select-all {
   font-size: 1.2rem;
   
@@ -130,6 +141,6 @@ export default {
   margin-bottom: 20px;
 }
 .class-one-part {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 </style>
