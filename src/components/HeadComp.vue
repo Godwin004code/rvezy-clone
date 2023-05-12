@@ -25,17 +25,17 @@
         <div class="ad ex">
             <h2>Adults</h2>
             <div class="option">
-                <div>-</div>
-                <div>0</div>
-                <div>+</div>
+                <div @click="decrement">-</div>
+                <div>{{ adultcount }}</div>
+                <div @click="increment">+</div>
             </div>
         </div>
         <div class="ad ex">
             <h2>Children</h2>
             <div class="option">
-                <div>-</div>
-                <div>0</div>
-                <div>+</div>
+                <div @click="ChildrenDecrement">-</div>
+                <div>{{ children }}</div>
+                <div @click="ChildrenIncrement">+</div>
             </div>
         </div>
         <div class="ad ex">
@@ -43,8 +43,8 @@
             <input type="radio">
         </div>
         <div class="ad">
-            <h3>Clear all</h3>
-            <button class="zbtn">Apply</button>
+            <h3 ref="guest_clear" @click="GuestClear">Clear all</h3>
+            <button class="zbtn" @click="GuestApply">Apply</button>
         </div>
     </div>
     <section class="filters">
@@ -59,7 +59,7 @@
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-chevron-up fa-w-14 up"><path fill="currentColor" d="M201.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 173.3 54.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" class=""></path></svg>
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-chevron-down fa-w-14 down"><path fill="currentColor" d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" class=""></path></svg>
         </button>
-        <button class="filter-btn drivable">
+        <button class="filter-btn drivable" @click="HasDeliveryFilter" ref="delivery">
             <span class="filter-btn-text">Delivery</span>
         </button>
         <button class="filter-btn drivable" ref="price" @click="handleClassChangePrice">
@@ -70,7 +70,7 @@
         <button class="filter-btn drivable">
             <span class="filter-btn-text">Pet friendly</span>
         </button>
-        <button class="filter-btn drivable"  @click="InstabookAvailablefilter" ref="instant_book">
+        <button class="filter-btn drivable"  @click="InstabookAvailablefilter" ref="instant_book" :disabled="disableFilter">
             <div class="filter-btn-text">Instant Book</div>
             <svg  data-v-df980350="" data-v-a6b063a6="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bolt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="ml-1 svg-inline--fa fa-bolt fa-w-14"><path data-v-df980350="" data-v-a6b063a6="" fill="currentColor" d="M317.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224C.9 240.7-2.6 254.8 2 267.3S18.7 288 32 288H143.5L66.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H240.5L317.4 44.6z" class=""></path></svg>
         </button>
@@ -82,7 +82,7 @@
         <button class="clear-all" @click="ClearAllFilters">clear all</button>
         </div>
         <div class="filter-b">
-            <div>{{ mapText }}</div>
+            <div class="map-text">{{ mapText }}</div>
             <div class="panel-body">  
       <!--Only code you need is this label-->
       <label class="switch">
@@ -95,13 +95,13 @@
     </section>
 </section>
     <section class="drivable-part" ref="drivable_part">
-        <div class="select">
+        <!-- <div class="select">
             <label class="checkbox-container">
         <input type="checkbox">
         <span class="checkmark"></span>
     </label>
            <span class="select-all"> Select all drivables</span>
-        </div>
+        </div> -->
         <section class="drive-box">
             <div class="class-one">
                 <label class="checkbox-container">
@@ -160,15 +160,15 @@
             </div>
         </section>
         <div class="ad">
-            <h3>Clear all</h3>
-            <button class="zbtn">Apply</button>
+            <h3  @click="clearTypeFilter">Clear all</h3>
+            <button class="zbtn" @click="filterByType">Apply</button>
         </div>
     </section>
     <section class="towable-part" ref="towable_part">
-        <div>
-            <input type="checkbox" id="select">
+        <!-- <div>
+            <input type="checkbox" id="select"   v-model="selectAll" @change="toggleSelectAll">
             Select all towables
-        </div>
+        </div> -->
         <section class="tow-box">
             <div class="class-one">
                 <label class="checkbox-container">
@@ -237,8 +237,8 @@
            
         </section>
         <div class="ad">
-            <h3>Clear all</h3>
-            <button class="zbtn">Apply</button>
+            <h3 @click="clearTypeFilter">Clear all</h3>
+            <button class="zbtn" @click="filterByType">Apply</button>
         </div>
     </section>
     <section class="price-part" ref="price_part">
@@ -246,7 +246,7 @@
         <section class="price-flex">
             <div>
                 <h2>Min Price</h2>
-                <input data-v-df980350="" id="min-price" type="text" class="price-input form-control" data-testid="min-price" :value="num">
+                <input data-v-df980350="" id="min-price" type="text" class="price-input form-control" data-testid="min-price"  v-model="num" >
             </div>
             <div>
                 <h2>Max Price</h2>
@@ -260,8 +260,8 @@
         </vue-slider>
         </div>
         <div class="ad">
-            <h3>Clear all</h3>
-            <button class="zbtn">Apply</button>
+            <h3 @click="clearPriceFilter">Clear all</h3>
+            <button class="zbtn" @click="filterByPrice">Apply</button>
         </div>
     </section>
     <section class="more-filters-part" ref="more_filters_part">
@@ -439,17 +439,25 @@
         </div>
     </section>
     <section class="main">
-        <section :class="checkbox === true ? 'main-content-area' : 'main-content-area f-w'">
+        
+            <section :class="checkbox === true ? 'main-content-area' : 'main-content-area f-w'">
             <section class="preloader-container" v-if="isLoading == true">
         <component v-for="(pre,index) in preloader" :key="index" :is="pre" />
     </section>
     <section class="rv-container" v-else>
-    <section class="skeleton" v-for="rv,index in filteredRVListings" :key="index">
+        <section v-if="filteredData.length > 0" class="rv-container-main">
+    <section class="skeleton" v-for="rv,index in filteredData" :key="index">
     <section class="card-img">
         <img class="imgs" :src="changeToWebp(rv.Photos[0].Path)" />
     </section>
     <section>
-        <div class="truncate-text">{{ rv.RVName }}</div>
+        <div class="truncate-text">
+            <router-link :to="{name: 'SingleRv', params: {id: rv.RVName}}" >
+                {{ rv.RVName }}
+            </router-link>
+            
+        
+        </div>
         <div class="sleep">Sleep {{ rv.Guests }} . {{ rv.RVType }}</div>
         <div class="sleep city">{{ rv.City }}, {{ rv.Country }}</div>
         <div class="rate"><span class="price">${{ rv.AveragePrice }} USD</span>/night
@@ -459,10 +467,29 @@
             <svg  data-v-df980350="" data-v-a6b063a6="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bolt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="ml-1 svg-inline--fa fa-bolt fa-w-14"><path data-v-df980350="" data-v-a6b063a6="" fill="currentColor" d="M317.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224C.9 240.7-2.6 254.8 2 267.3S18.7 288 32 288H143.5L66.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H240.5L317.4 44.6z" class=""></path></svg>
         </span>
         </div>
+        <div class="is-featured" v-if="rv.IsFeatured">Featured</div>
     </section>
-    </section>    
+    </section>  
+</section>
+<section class="res-container" v-else>
+    <section class="res-head"> <span class="nf-icon">
+        <path fill="currentColor" d="M256 192c17.67 0 32-14.33 32-32c0-17.67-14.33-32-32-32S224 142.3 224 160C224 177.7 238.3 192 256 192zM296 336h-16V248C280 234.8 269.3 224 256 224H224C210.8 224 200 234.8 200 248S210.8 272 224 272h8v64h-16C202.8 336 192 346.8 192 360S202.8 384 216 384h80c13.25 0 24-10.75 24-24S309.3 336 296 336z" class="fa-primary"></path>
+    </span>
+No results found
+    </section>
+    <section class="res-body">
+        <div>
+            <img src="https://www.rvezy.com/_nuxt/img/empty-rv.fded2b7.svg" alt="not found">
+        </div>
+        <h2> No Results Found
+</h2>
+<p>Try changing location or search criteria</p>
+    </section>
+</section>
     </section>
         </section>
+        
+        
         <section class="main-content-map" v-if="checkbox === true">
             map will be here
         </section>
@@ -486,7 +513,10 @@ export default {
         vueSlider
     },
     data() {
+        
         return {
+            adultcount: 0,
+            children: 0,
             data: [],
             isLoading: false,
             preloader: Array(30).fill(SkeletonCard),
@@ -500,6 +530,7 @@ export default {
    checkbox: false,
    map_text: "Show map",
    num: 0,
+   
    weightNum: 0,
    lengthNum: 0,
    options: {
@@ -629,11 +660,35 @@ labelStyle: void 0,
 labelActiveStyle: void 0,
 },
 selectedRVTypes: [],
+selectAll: false,
+disableFilter: false,
+
         }
         
     },
     
     methods: {
+        increment() {
+      this.adultcount++
+    },
+    decrement() {
+     // this.adultcount--
+      if(this.adultcount === 0) {
+        return
+      }
+      this.adultcount--
+    },
+    ChildrenIncrement() {
+      this.children++
+    },
+    ChildrenDecrement() {
+     // this.adultcount--
+      if(this.children === 0) {
+        return
+      }
+      this.children--
+    },
+        
         getDatas() {
             this.isLoading = true
            // console.log(this.isLoading)
@@ -649,6 +704,7 @@ selectedRVTypes: [],
                 const popular = data.PopularRVs.ListRVs
                 const newData = featured.concat(popular)
                 this.data = newData
+             
                 console.log(this.data)
                 
                
@@ -707,38 +763,60 @@ selectedRVTypes: [],
        },
   
        InstabookAvailablefilter() {
-        console.log("clicked")
+        
         this.$refs.instant_book.classList.add("active-btn")
         const instaData = this.data.filter(res => res.InstabookAvailable === true)
         this.data = instaData
         
        },
-       ClearAllFilters() {
-        fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=45.548191514007186&neLng=-75.21003668945312&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured")
-            .then((response) => response.json())
-            .then((data) => {
-                
-                
-            
-                this.isLoading = false
-                this.$refs.instant_book.classList.remove("active-btn")
-                //console.log(this.isLoading)
-                const featured = data.FeaturedRVs.ListRVs
-                const popular = data.PopularRVs.ListRVs
-                const newData = featured.concat(popular)
-                this.data = newData
-                
-               
-            } )
+       HasDeliveryFilter() {
+        this.$refs.delivery.classList.add("active-btn")
+        const hasDel = this.data.filter(res => res.HasDelivery === true)
+        this.data = hasDel
        },
-    
-       
+       ClearAllFilters() {
+      //  this.$refs.instant_book.removeEventListener("click", this.InstabookAvailablefilter)
+      this.$refs.delivery.classList.remove("active-btn")
+      this.$refs.instant_book.classList.remove("active-btn")
+      this.$refs.price_part.classList.remove("active")
+      this.$refs.drivable_part.classList.remove("active")
+      this.$refs.towable_part.classList.remove("active")
+        this.selectedRVTypes = [];
+        this.getDatas()
+        
+       }  ,
+      
+    filterByPrice() {
+      this.$forceUpdate();
+      this.$refs.price_part.classList.remove("active")
+    },
+    filterByType() {
+      this.$forceUpdate();
+      this.$refs.drivable_part.classList.remove("active")
+      this.$refs.towable_part.classList.remove("active")
+    },
+    clearTypeFilter() {
+      this.selectedRVTypes = [];
+     // this.$forceUpdate();
+    },
+    clearPriceFilter() {
+      this.num = "";
+      this.$forceUpdate();
+    },
+    GuestClear() {
+        this.adultcount = 0
+        this.children = 0
+    },
+    GuestApply() {
+        this.$refs.guests.classList.remove("active")
+    }
     },
     created() {
         this.getDatas()
        
     },
     computed: {
+       
     backgroundStyles() {
       return {
         'gold-mid': this.value,
@@ -751,15 +829,20 @@ selectedRVTypes: [],
     mapText() {
         return this.checkbox === true ? "Hide map" : "Show map"
     },
-    filteredRVListings() {
-    if (this.selectedRVTypes.length === 0) {
-      return this.data;
-    } else {
-      return this.data.filter(listing => {
-        return this.selectedRVTypes.includes(listing.RVType);
-      });
-    }
-  }
+    filteredData() {
+      let result = this.data;
+      if (this.num) {
+        result = result.filter((item) => item.AveragePrice >= this.num);
+      }
+      if (this.selectedRVTypes.length > 0) {
+        result = result.filter((item) => this.selectedRVTypes.includes(item.RVType));
+      }
+      if (this.selectAll) {
+        result = result.filter((item) => item.AveragePrice);
+      }
+      return result;
+    },
+ 
   }
 
    

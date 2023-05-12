@@ -58,6 +58,7 @@ export default {
     color: #68829c;
     border-radius: 50%;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 .ad .option div:last-child {
   font-size: 1.5rem;
@@ -65,6 +66,7 @@ export default {
   background-color: transparent;
     border: 1px solid #032e5a;
     color: #032e5a;
+    cursor: pointer;
 }
 .ad, .tow-box {
   display: flex;

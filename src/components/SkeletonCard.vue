@@ -102,6 +102,18 @@
 .rate {
     color: #032e5a;
 }
+.is-featured {
+    margin-top: 1.25rem;
+    border: none;
+    color: #032e5a;
+    background-color: #f2f5f7;
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+    font-size: .875rem;
+    border-radius: 0.25rem;
+    width: 40%;
+    text-align: center;
+}
 .truncate-text {
     max-width: 10rem;
     overflow: hidden;
@@ -117,11 +129,18 @@
     border-radius: 1rem;
 }
 .rv-container {
-    display: flex;
-    flex-wrap: wrap;
+    
     width: 90%;
     margin: 0 auto;
-    justify-content: space-between;
+}
+.rv-container-main {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    
+}
+.skeleton {
+    margin-right: 20px;
 }
 .imgs {
     border-radius: 1rem;
@@ -206,6 +225,11 @@ header {
     display: flex;
     align-items: center;
 }
+.filter-b .map-text {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-right: 6px;
+}
 .filter-btn {
     border: 0.0625rem solid #cdd5de;
     background-color: #fff;
@@ -276,6 +300,7 @@ header {
 }
 .price-part {
     max-width: 30rem;
+    left: 20%;
 }
 .more-filters-part {
     right: 0;
