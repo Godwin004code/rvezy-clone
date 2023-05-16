@@ -14,7 +14,7 @@
                     <label for="when" class="search-tag">Date</label>
                     <input type="text" id="when" value="When?" readonly>
                 </div>
-                <div class="group-1 three" @click="handleGuestClick">
+                <div class="group-1 three">
                     <label for="who" class="search-tag">Guests</label>
                     <input type="text" id="who" value="Who's going?" readonly>
                 </div>
