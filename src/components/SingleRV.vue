@@ -21,32 +21,7 @@
             </div>
         </div>
     </header>
-    <div class="guests" ref="guests">
-        <div class="ad ex">
-            <h2>Adults</h2>
-            <div class="option">
-                <div @click="decrement">-</div>
-                <div>{{ adultcount }}</div>
-                <div @click="increment">+</div>
-            </div>
-        </div>
-        <div class="ad ex">
-            <h2>Children</h2>
-            <div class="option">
-                <div @click="ChildrenDecrement">-</div>
-                <div>{{ children }}</div>
-                <div @click="ChildrenIncrement">+</div>
-            </div>
-        </div>
-        <div class="ad ex">
-            <h2>Pets</h2>
-            <input type="radio">
-        </div>
-        <div class="ad">
-            <h3 ref="guest_clear" @click="GuestClear">Clear all</h3>
-            <button class="zbtn" @click="GuestApply">Apply</button>
-        </div>
-    </div>
+  
     </section>
     <section class="single-container">
 <section class="single-container-one">
