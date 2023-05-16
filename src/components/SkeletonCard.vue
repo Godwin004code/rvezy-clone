@@ -304,7 +304,7 @@ header {
     left: 20%;
 }
 .more-filters-part {
-    right: 0;
+    right: 10%;
 }
 .more-filters-part .more-filters-one, .more-filters-part .more-filters-two {
     display: flex;
