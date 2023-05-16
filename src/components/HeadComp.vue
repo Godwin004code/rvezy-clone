@@ -1,4 +1,5 @@
 <template>
+    
    <section class="fixed-class">
     <header>
         <div class="section-1">
@@ -447,9 +448,11 @@
     <section class="rv-container" v-else>
         <section v-if="filteredData.length > 0" class="rv-container-main">
     <section class="skeleton" v-for="rv,index in filteredData" :key="index">
-    <section class="card-img">
+        
+    <section class="card-img" :key="index">
         <img class="imgs" :src="changeToWebp(rv.Photos[0].Path)" />
     </section>
+    
     <section>
         <div class="truncate-text">
             <router-link :to="{name: 'SingleRv', params: {id: rv.RVName}}" >
@@ -491,183 +494,217 @@ No results found
         
         
         <section class="main-content-map" v-if="checkbox === true">
-            map will be here
+            <div class="map-wrap">
+    
+    <div class="map" ref="mapContainer">
+        I'll integrate the map soon. getting some errors here 
+    </div>
+  </div>
         </section>
    
 </section>
 </template>
 
+<!-- <style scoped>
+@import '~maplibre-gl/dist/maplibre-gl.css';
+
+.map-wrap {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 77px); /* calculate height of the screen minus the heading */
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
 
+</style> -->
 
 
 <script>
 import SkeletonCard from "./SkeletonCard.vue"
 import vueSlider from "vue-slider-component"
-//import VueImageSlider from 'vue-image-slider'
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+import 'swiper/css';
 export default {
     name: 'App',
    
     components: {
         SkeletonCard,
-        vueSlider
+        Swiper,
+      SwiperSlide,
+      vueSlider,
+       
     },
+    
     data() {
         
         return {
+            
+            
             adultcount: 0,
             children: 0,
             data: [],
             isLoading: false,
             preloader: Array(30).fill(SkeletonCard),
             baseURL: "https://cdn-d.rvezy.com/450x300x80",
-            imageArray: [
-    'https://cdn.pixabay.com/photo/2015/12/12/15/24/amsterdam-1089646_1280.jpg',
-    'https://cdn.pixabay.com/photo/2016/02/17/23/03/usa-1206240_1280.jpg',
-    'https://cdn.pixabay.com/photo/2015/05/15/14/27/eiffel-tower-768501_1280.jpg',
-    'https://cdn.pixabay.com/photo/2016/12/04/19/30/berlin-cathedral-1882397_1280.jpg'
-   ],
-   checkbox: false,
-   map_text: "Show map",
-   num: 0,
+            slides: [],
+            checkbox: false,
+            map_text: "Show map",
+            num: 0,
    
-   weightNum: 0,
-   lengthNum: 0,
-   options: {
+            weightNum: 0,
+            lengthNum: 0,
+            options: {
 
-    dotSize: 14,
-    width: '100%',
-    height: 4,
-    contained: false,
-    direction: 'ltr',
-    data: null,
-    dataLabel: 'label',
-    dataValue: 'value',
-    min: 0,
-    max: 500,
-    interval: 1,
-    disabled: false,
-    clickable: true,
-    duration: 0.5,
-    adsorb: false,
-    lazy: false,
-    tooltip: 'active',
-    tooltipPlacement: 'top',
-    tooltipFormatter: void 0,
-    useKeyboard: false,
-    keydownHook: null,
-    dragOnClick: false,
-    enableCross: true,
-    fixed: false,
-    minRange: void 0,
-    maxRange: void 0,
-    order: true,
-    marks: false,
-    dotOptions: void 0,
-    dotAttrs: void 0,
-    process: true,
-    dotStyle: void 0,
-    railStyle: void 0,
-    processStyle: void 0,
-    tooltipStyle: void 0,
-    stepStyle: void 0,
-    stepActiveStyle: void 0,
-    labelStyle: void 0,
-    labelActiveStyle: void 0,
-   },
-   lengthOptions: {
+                dotSize: 14,
+                width: '100%',
+                height: 4,
+                contained: false,
+                direction: 'ltr',
+                data: null,
+                dataLabel: 'label',
+                dataValue: 'value',
+                min: 0,
+                max: 500,
+                interval: 1,
+                disabled: false,
+                clickable: true,
+                duration: 0.5,
+                adsorb: false,
+                lazy: false,
+                tooltip: 'active',
+                tooltipPlacement: 'top',
+                tooltipFormatter: void 0,
+                useKeyboard: false,
+                keydownHook: null,
+                dragOnClick: false,
+                enableCross: true,
+                fixed: false,
+                minRange: void 0,
+                maxRange: void 0,
+                order: true,
+                marks: false,
+                dotOptions: void 0,
+                dotAttrs: void 0,
+                process: true,
+                dotStyle: void 0,
+                railStyle: void 0,
+                processStyle: void 0,
+                tooltipStyle: void 0,
+                stepStyle: void 0,
+                stepActiveStyle: void 0,
+                labelStyle: void 0,
+                labelActiveStyle: void 0,
+            },
+            lengthOptions: {
 
-dotSize: 14,
-width: '100%',
-height: 4,
-contained: false,
-direction: 'ltr',
-data: null,
-dataLabel: 'label',
-dataValue: 'value',
-min: 0,
-max: 500,
-interval: 1,
-disabled: false,
-clickable: true,
-duration: 0.5,
-adsorb: false,
-lazy: false,
-tooltip: 'active',
-tooltipPlacement: 'top',
-tooltipFormatter: void 0,
-useKeyboard: false,
-keydownHook: null,
-dragOnClick: false,
-enableCross: true,
-fixed: false,
-minRange: void 0,
-maxRange: void 0,
-order: true,
-marks: false,
-dotOptions: void 0,
-dotAttrs: void 0,
-process: true,
-dotStyle: void 0,
-railStyle: void 0,
-processStyle: void 0,
-tooltipStyle: void 0,
-stepStyle: void 0,
-stepActiveStyle: void 0,
-labelStyle: void 0,
-labelActiveStyle: void 0,
-},
-weightOptions: {
+            dotSize: 14,
+            width: '100%',
+            height: 4,
+            contained: false,
+            direction: 'ltr',
+            data: null,
+            dataLabel: 'label',
+            dataValue: 'value',
+            min: 0,
+            max: 500,
+            interval: 1,
+            disabled: false,
+            clickable: true,
+            duration: 0.5,
+            adsorb: false,
+            lazy: false,
+            tooltip: 'active',
+            tooltipPlacement: 'top',
+            tooltipFormatter: void 0,
+            useKeyboard: false,
+            keydownHook: null,
+            dragOnClick: false,
+            enableCross: true,
+            fixed: false,
+            minRange: void 0,
+            maxRange: void 0,
+            order: true,
+            marks: false,
+            dotOptions: void 0,
+            dotAttrs: void 0,
+            process: true,
+            dotStyle: void 0,
+            railStyle: void 0,
+            processStyle: void 0,
+            tooltipStyle: void 0,
+            stepStyle: void 0,
+            stepActiveStyle: void 0,
+            labelStyle: void 0,
+            labelActiveStyle: void 0,
+            },
+            weightOptions: {
 
-dotSize: 14,
-width: '100%',
-height: 4,
-contained: false,
-direction: 'ltr',
-data: null,
-dataLabel: 'label',
-dataValue: 'value',
-min: 0,
-max: 500,
-interval: 1,
-disabled: false,
-clickable: true,
-duration: 0.5,
-adsorb: false,
-lazy: false,
-tooltip: 'active',
-tooltipPlacement: 'top',
-tooltipFormatter: void 0,
-useKeyboard: false,
-keydownHook: null,
-dragOnClick: false,
-enableCross: true,
-fixed: false,
-minRange: void 0,
-maxRange: void 0,
-order: true,
-marks: false,
-dotOptions: void 0,
-dotAttrs: void 0,
-process: true,
-dotStyle: void 0,
-railStyle: void 0,
-processStyle: void 0,
-tooltipStyle: void 0,
-stepStyle: void 0,
-stepActiveStyle: void 0,
-labelStyle: void 0,
-labelActiveStyle: void 0,
-},
-selectedRVTypes: [],
-selectAll: false,
-disableFilter: false,
-
+            dotSize: 14,
+            width: '100%',
+            height: 4,
+            contained: false,
+            direction: 'ltr',
+            data: null,
+            dataLabel: 'label',
+            dataValue: 'value',
+            min: 0,
+            max: 500,
+            interval: 1,
+            disabled: false,
+            clickable: true,
+            duration: 0.5,
+            adsorb: false,
+            lazy: false,
+            tooltip: 'active',
+            tooltipPlacement: 'top',
+            tooltipFormatter: void 0,
+            useKeyboard: false,
+            keydownHook: null,
+            dragOnClick: false,
+            enableCross: true,
+            fixed: false,
+            minRange: void 0,
+            maxRange: void 0,
+            order: true,
+            marks: false,
+            dotOptions: void 0,
+            dotAttrs: void 0,
+            process: true,
+            dotStyle: void 0,
+            railStyle: void 0,
+            processStyle: void 0,
+            tooltipStyle: void 0,
+            stepStyle: void 0,
+            stepActiveStyle: void 0,
+            labelStyle: void 0,
+            labelActiveStyle: void 0,
+            },
+            selectedRVTypes: [],
+            selectAll: false,
+            disableFilter: false,
+            current: 0,
+            
         }
         
     },
     
     methods: {
+        nextSlide: function(param) {
+        this.current++;
+        if (this.current >= param.length)
+          this.current = 0; 
+      },
+      prevSlide: function(param) {
+        this.current--;
+        if (this.current < 0)
+          this.current = param.length - 1;
+      },
         increment() {
       this.adultcount++
     },
@@ -691,8 +728,10 @@ disableFilter: false,
         
         getDatas() {
             this.isLoading = true
-           // console.log(this.isLoading)
-            fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=45.548191514007186&neLng=-75.21003668945312&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured")
+           // console.log(this.isLoading) 
+           // long 75.21003668945312
+           // lat 45.548191514007186
+            fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=&neLng=-&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured&Amenities=Microwave")
             .then((response) => response.json())
             .then((data) => {
                 
@@ -704,11 +743,13 @@ disableFilter: false,
                 const popular = data.PopularRVs.ListRVs
                 const newData = featured.concat(popular)
                 this.data = newData
-             
                 console.log(this.data)
+                //const imgpics = newData.Photos
+             
+                //console.log(imgpics)
                 
                
-            } )
+            } ).catch((err) => console.log(err))
         },
         toggleCheckbox() {
       this.checkbox = !this.checkbox

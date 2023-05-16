@@ -127,6 +127,7 @@
 .card-img {
     height: 150px;
     border-radius: 1rem;
+   
 }
 .rv-container {
     
@@ -362,5 +363,28 @@ header {
 }
 select {
     padding: 0.25rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .rv-container-main {
+        width: 90%;
+        margin: 0 auto;
+        flex-direction: column;
+    }
+    .filters {
+        display: none;
+    }
+    .skeleton {
+        min-width: 100%;
+    }
+    .card-img {
+        height: 200px;
+    }
+    .truncate-text {
+        max-width: 25rem;
+    }
+    .is-featured {
+        width: 100%;
+    }
 }
 </style>
