@@ -271,7 +271,7 @@
                 <h2>temperature</h2>
             <div>
                 <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" v-model="checked" @change="air_checked">
         <span class="checkmark"></span>
     </label>
                 <label for="ac">Air Conditioner</label>
@@ -288,14 +288,14 @@
             <h2>kitchen</h2>
             <div class="ref">
                 <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" v-model="refr" @change="ref_checked">
         <span class="checkmark"></span>
     </label>
                 <label for="ref">Refrigerator</label>
             </div>
             <div>
                 <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" v-model="mic" @change="mic_checked">
         <span class="checkmark"></span>
     </label>
                 <label for="mic">Microwave</label>
@@ -309,14 +309,14 @@
             </div>
             <div>
                 <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" v-model="stove" @change="stove_checked">
         <span class="checkmark"></span>
     </label>
                 <label for="stove">stove Range</label>
             </div>
             <div>
                 <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" v-model="kit" @change="kitchen_checked">
         <span class="checkmark"></span>
     </label>
                 <label for="kit">Kitchen Sink</label>
@@ -371,16 +371,10 @@
     </label>
                 <label for="din">include RV cottage</label>
             </div>
+            
             <div>
                 <label class="checkbox-container">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-    </label>
-                <label for="stove">stove Range</label>
-            </div>
-            <div>
-                <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" v-model="kit" @change="kitchen_checked">
         <span class="checkmark"></span>
     </label>
                 <label for="kit">Kitchen Sink</label>
@@ -421,7 +415,7 @@
         </div>
         <div class="ad">
             <h3>Clear all</h3>
-            <button class="zbtn">Apply</button>
+            <button class="zbtn" @click="closeMoreFilters">Apply</button>
         </div>
     </section>
     <section class="title">
@@ -545,7 +539,12 @@ export default {
         
         return {
             
-            
+            checked: false,
+            mic: false,
+            refr: false,
+            kit: false,
+            stove: false,
+            heat: false,
             adultcount: 0,
             children: 0,
             data: [],
@@ -731,7 +730,7 @@ export default {
            // console.log(this.isLoading) 
            // long 75.21003668945312
            // lat 45.548191514007186
-            fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=&neLng=-&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured&Amenities=Microwave")
+            fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=&neLng=-&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured")
             .then((response) => response.json())
             .then((data) => {
                 
@@ -826,7 +825,81 @@ export default {
         this.getDatas()
         
        }  ,
-      
+       closeMoreFilters() {
+        this.$refs.more_filters_part.classList.remove("active")
+       },
+       air_checked() {
+       if(this.checked) {
+        fetch("https://api.rvezy.com/api/rvlistings/unified-search?swLat=45.224121941465604&swLng=-76.19331305664062&neLat=&neLng=-&SortOrder=Recommended&CurrentPage=0&FeaturedCurrentPage=0&FeaturedPageSize=5&IncludeFeatured&amenities=AirConditioner")
+            .then((response) => response.json())
+            .then((data) => {
+                
+                
+                console.log(data)
+                this.isLoading = false
+                //console.log(this.isLoading)
+                const featured = data.FeaturedRVs.ListRVs
+                const popular = data.PopularRVs.ListRVs
+                const newData = featured.concat(popular)
+                this.data = newData
+                console.log(this.data)
+                //const imgpics = newData.Photos
+             
+                //console.log(imgpics)
+                
+               
+            } ).catch((err) => console.log(err))
+       }
+       return this.data
+    },
+    mic_checked() {
+       if(this.mic) {
+        console.log(this.mic);
+        this.getDatas()
+        this.data.reverse()
+       }
+       return this.data
+    },
+    ref_checked() {
+       if(this.mic) {
+        console.log(this.mic);
+        this.getDatas()
+        this.data.reverse()
+       }
+       return this.data
+    },
+    heater_checked() {
+       if(this.mic) {
+        console.log(this.mic);
+        this.getDatas()
+        this.data.reverse()
+       }
+       return this.data
+    },
+    din_checked() {
+       if(this.mic) {
+        console.log(this.mic);
+        this.getDatas()
+        this.data.reverse()
+       }
+       return this.data
+    },
+    stove_checked() {
+       if(this.mic) {
+        console.log(this.mic);
+        this.getDatas()
+        this.data.reverse()
+       }
+       return this.data
+    },
+    kitchen_checked() {
+       if(this.mic) {
+        console.log(this.mic);
+        this.getDatas()
+        this.data.reverse()
+       }
+       return this.data
+    },
     filterByPrice() {
       this.$forceUpdate();
       this.$refs.price_part.classList.remove("active")
@@ -884,7 +957,8 @@ export default {
       return result;
     },
  
-  }
+  },
+  
 
    
 }

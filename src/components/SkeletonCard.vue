@@ -386,5 +386,11 @@ select {
     .is-featured {
         width: 100%;
     }
+    .filter-1 {
+        width: 60%;
+    }
+    .filters {
+        margin-top: 0px;
+    }
 }
 </style>
